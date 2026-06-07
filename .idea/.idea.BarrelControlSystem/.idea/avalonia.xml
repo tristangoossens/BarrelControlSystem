@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="BarrelControlSystem.UI/App.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/MainWindow.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

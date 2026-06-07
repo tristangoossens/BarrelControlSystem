@@ -1,0 +1,82 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:BarrelControlSystem.UI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="600"
+        x:Class="BarrelControlSystem.UI.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/favicon.ico"
+        Title="Barrel Control System (BCS)"
+        Width="1024" Height="600"
+        WindowStartupLocation="CenterScreen">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Window.Styles>
+        <Style Selector="Button.nav">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.1"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#3c3c3c"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid ColumnDefinitions="250, *">
+        <!-- Navigation Bar (Sidebar) -->
+        <Border Grid.Column="0" Background="#2b2b2b" BorderBrush="#3c3c3c" BorderThickness="0,0,1,0">
+            <StackPanel Spacing="5" Margin="10">
+                <TextBlock Text="BCS" Foreground="White" FontSize="24" FontWeight="Bold" Margin="10,20,10,30" HorizontalAlignment="Center"/>
+                
+                <Button Classes="nav" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="15,10">
+                    <StackPanel Orientation="Horizontal" Spacing="15">
+                        <icons:MaterialIcon Kind="Home" Width="24" Height="24"/>
+                        <TextBlock Text="Homepage" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Classes="nav" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="15,10">
+                    <StackPanel Orientation="Horizontal" Spacing="15">
+                        <icons:MaterialIcon Kind="ViewDashboard" Width="24" Height="24"/>
+                        <TextBlock Text="Dashboard" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Classes="nav" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="15,10">
+                    <StackPanel Orientation="Horizontal" Spacing="15">
+                        <icons:MaterialIcon Kind="FormatListBulleted" Width="24" Height="24"/>
+                        <TextBlock Text="Programs" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Classes="nav" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="15,10">
+                    <StackPanel Orientation="Horizontal" Spacing="15">
+                        <icons:MaterialIcon Kind="Settings" Width="24" Height="24"/>
+                        <TextBlock Text="Configuration" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Panel Grid.Column="1" Background="#1e1e1e">
+            <ContentControl Margin="20">
+                <TextBlock x:CompileBindings="False" Text="{Binding Greeting}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </ContentControl>
+        </Panel>
+    </Grid>
+</Window>

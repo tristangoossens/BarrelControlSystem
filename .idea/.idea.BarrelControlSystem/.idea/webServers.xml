@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="2ebc5efc-62cb-492b-bc4a-ce658ba2b688" name="Raspberry Pi 5">
+        <fileTransfer rootFolder="/home/tristan/BCS" accessType="SFTP" host="trispi.local" port="22" sshConfigId="d7db560a-c26a-4839-b494-811c04ca20c0" sshConfig="tristan@trispi.local:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
