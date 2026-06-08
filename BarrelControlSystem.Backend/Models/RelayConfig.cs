@@ -4,7 +4,8 @@ namespace BarrelControlSystem.Backend.Models;
 
 public class RelayConfig
 {
-    public int PinNumber { get; set; }
+    public int RelayPinNumber { get; set; }
+    public int GpioPinNumberBcm { get; set; }
     public DeviceConfig ConnectedDevice { get; set; }
     
     public DateTime LastUsed { get; set; }
@@ -13,7 +14,7 @@ public class RelayConfig
     public override string ToString()
     {
         string deviceStr = ConnectedDevice?.ToString() ?? "No device connected";
-        return $"Relay Pin: {PinNumber}\n" +
+        return $"Relay Pin: {RelayPinNumber} (GPIO: {GpioPinNumberBcm})\n" +
                $"  {deviceStr.Replace("\n", "\n  ")}\n" +
                $"  Last Used: {LastUsed}\n" +
                $"  Config Updated: {ConfigurationLastUpdated}";
