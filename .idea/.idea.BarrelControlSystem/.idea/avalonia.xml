@@ -4,7 +4,22 @@
     <option name="projectPerEditor">
       <map>
         <entry key="BarrelControlSystem.UI/App.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Styles/Colors.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/AppHeaderView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/Components/AppHeaderView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/Components/ToastView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/Configuration/ConfigurationView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/Configuration/RelayConfigurationView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/Configuration/SystemConfigurationView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/ConfigurationView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/Dashboard/DashboardView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/DashboardView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/Home/HomeView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/HomeView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
         <entry key="BarrelControlSystem.UI/Views/MainWindow.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/RelayConfigurationView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/SystemConfigurationView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
+        <entry key="BarrelControlSystem.UI/Views/ToastView.axaml" value="BarrelControlSystem.UI/BarrelControlSystem.UI.csproj" />
       </map>
     </option>
   </component>

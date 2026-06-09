@@ -1,0 +1,166 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BarrelControlSystem.UI.ViewModels.Configuration"
+             xmlns:models="clr-namespace:BarrelControlSystem.Backend.Models;assembly=BarrelControlSystem.Backend"
+             xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="BarrelControlSystem.UI.Views.Configuration.RelayConfigurationView"
+             x:DataType="vm:RelayConfigurationViewModel">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="0,10">
+            <TextBlock Text="Relay Settings" FontSize="20" FontWeight="Bold" Foreground="White" Margin="0,0,0,5"/>
+            <TextBlock Text="Configure individual relay channels and assignments." FontSize="14" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,10"/>
+            
+            <ItemsControl ItemsSource="{Binding RelayConfigs}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Expander Margin="0,5" Padding="10" Background="{DynamicResource MainBackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="4" HorizontalAlignment="Stretch">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                    <icons:MaterialIcon Width="20" Height="20">
+                                        <icons:MaterialIcon.Styles>
+                                            <Style Selector="icons|MaterialIcon">
+                                                <!-- Default (Unknown) -->
+                                                <Setter Property="Kind" Value="HelpCircle"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource IconUnknownBrush}"/>
+                                            </Style>
+                                            <Style Selector="icons|MaterialIcon[Tag=Light]">
+                                                <Setter Property="Kind" Value="Lightbulb"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource IconLightBrush}"/>
+                                            </Style>
+                                            <Style Selector="icons|MaterialIcon[Tag=Horn]">
+                                                <Setter Property="Kind" Value="Speaker"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource IconHornBrush}"/>
+                                            </Style>
+                                            <Style Selector="icons|MaterialIcon[Tag=ToggledHorn]">
+                                                <Setter Property="Kind" Value="Bullhorn"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource IconToggledHornBrush}"/>
+                                            </Style>
+                                        </icons:MaterialIcon.Styles>
+                                        <icons:MaterialIcon.Tag>
+                                            <Binding Path="ConnectedDevice.Type"/>
+                                        </icons:MaterialIcon.Tag>
+                                    </icons:MaterialIcon>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Foreground="White">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} ({1})">
+                                                    <Binding Path="Id" />
+                                                    <Binding Path="ConnectedDevice.Name" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <StackPanel Orientation="Horizontal" Spacing="10">
+                                            <TextBlock Text="{Binding LastUsed, StringFormat='Last used: {0:g}'}" FontSize="10" Foreground="{DynamicResource SecondaryTextBrush}"/>
+                                            <TextBlock Text="{Binding ConfigurationLastUpdated, StringFormat='Updated: {0:g}'}" FontSize="10" Foreground="{DynamicResource SecondaryTextBrush}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel Spacing="20" Margin="10">
+                                <!-- General Section -->
+                                <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Background="{DynamicResource SubSectionBackgroundBrush}" CornerRadius="4" Padding="10">
+                                    <StackPanel Spacing="5">
+                                        <TextBlock Text="General" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                                        <TextBlock Text="Pin and GPIO assignments" FontSize="12" Foreground="#a0a0a0" Margin="0, 0, 0, 10"/>
+                                        
+                                        <StackPanel Spacing="20">
+                                            <StackPanel Spacing="5">
+                                                <TextBlock Text="Relay Pin Number" FontWeight="Bold" FontSize="12" Foreground="White"/>
+                                                <NumericUpDown Value="{Binding RelayPinNumber}" IsEnabled="False" HorizontalAlignment="Stretch"/>
+                                                
+                                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                                    <icons:MaterialIcon Kind="InformationOutline" Foreground="{DynamicResource IconBrush}" Width="16" Height="16"/>
+                                                    <TextBlock Text="The pin number on the relay board." FontSize="11" Foreground="{DynamicResource TertiaryTextBrush}"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <StackPanel Spacing="5">
+                                                <TextBlock Text="GPIO Pin Number" FontSize="12" FontWeight="Bold" Foreground="White"/>
+                                                <NumericUpDown Value="{Binding GpioPinNumberBcm}" HorizontalAlignment="Stretch"/>
+                                                
+                                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                                    <icons:MaterialIcon Kind="InformationOutline" Foreground="{DynamicResource IconBrush}" Width="16" Height="16"/>
+                                                    <TextBlock Text="The BCM GPIO pin number." FontSize="11" Foreground="{DynamicResource TertiaryTextBrush}"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                                
+                                <!-- Device Section -->
+                                <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Background="{DynamicResource SubSectionBackgroundBrush}" CornerRadius="4" Padding="10">
+                                     <StackPanel Spacing="5">
+                                        <TextBlock Text="Device" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                                        <TextBlock Text="Connected device configuration" FontSize="12" Foreground="#a0a0a0" Margin="0, 0, 0, 10"/>
+                                        
+                                        <StackPanel Spacing="20">
+                                            <StackPanel Spacing="5">
+                                                <TextBlock Text="Name" FontWeight="Bold" FontSize="12" Foreground="White"/>
+                                                <TextBox Text="{Binding ConnectedDevice.Name}" HorizontalAlignment="Stretch"/>
+                                                
+                                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                                    <icons:MaterialIcon Kind="InformationOutline" Foreground="{DynamicResource IconBrush}" Width="16" Height="16"/>
+                                                    <TextBlock Text="The name of the connected device." FontSize="11" Foreground="{DynamicResource TertiaryTextBrush}"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <StackPanel Spacing="5">
+                                                <TextBlock Text="Device Type" FontWeight="Bold" FontSize="12" Foreground="White"/>
+                                                <ComboBox SelectedItem="{Binding ConnectedDevice.Type}" 
+                                                          ItemsSource="{Binding $parent[UserControl].((vm:RelayConfigurationViewModel)DataContext).DeviceTypes}" 
+                                                          HorizontalAlignment="Stretch"/>
+                                                
+                                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                                    <icons:MaterialIcon Kind="InformationOutline" Foreground="{DynamicResource IconBrush}" Width="16" Height="16"/>
+                                                    <TextBlock Text="The type of the connected device. (Purely cosmetic, will not effect functionality)" FontSize="11" Foreground="{DynamicResource TertiaryTextBrush}"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <StackPanel Spacing="5">
+                                                <TextBlock Text="Description" FontSize="12" FontWeight="Bold" Foreground="White"/>
+                                                <TextBox Text="{Binding ConnectedDevice.Description}" HorizontalAlignment="Stretch"/>
+                                                
+                                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                                    <icons:MaterialIcon Kind="InformationOutline" Foreground="{DynamicResource IconBrush}" Width="16" Height="16"/>
+                                                    <TextBlock Text="Brief description of the device." FontSize="11" Foreground="{DynamicResource TertiaryTextBrush}"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                                
+                                <!-- Capabilities Section -->
+                                <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Background="{DynamicResource SubSectionBackgroundBrush}" CornerRadius="4" Padding="10">
+                                    <StackPanel Spacing="5">
+                                        <TextBlock Text="Capabilities" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                                        <TextBlock Text="Select device capabilities" FontSize="12" Foreground="#a0a0a0" Margin="0, 0, 0, 10"/>
+                                        
+                                        <StackPanel Spacing="5">
+                                            <CheckBox Content="Toggle" IsChecked="{Binding CanToggle}"/>
+                                            <CheckBox Content="Pulse" IsChecked="{Binding CanPulse}"/>
+                                            <CheckBox Content="Hold" IsChecked="{Binding CanHold}"/>
+                                            <CheckBox Content="Strobe" IsChecked="{Binding CanStrobe}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Buttons -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+                                    <Button Command="{Binding $parent[UserControl].((vm:RelayConfigurationViewModel)DataContext).SaveRelayCommand}" CommandParameter="{Binding .}" Background="{DynamicResource SaveButtonBrush}" Foreground="White" Padding="10,5">
+                                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                                            <icons:MaterialIcon Kind="Check" Width="16" Height="16"/>
+                                            <TextBlock Text="Save" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Command="{Binding $parent[UserControl].((vm:RelayConfigurationViewModel)DataContext).ResetRelayCommand}" CommandParameter="{Binding .}" Background="{DynamicResource ResetButtonBrush}" Foreground="White" Padding="10,5">
+                                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                                            <icons:MaterialIcon Kind="Restore" Width="16" Height="16"/>
+                                            <TextBlock Text="Reset" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Expander>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

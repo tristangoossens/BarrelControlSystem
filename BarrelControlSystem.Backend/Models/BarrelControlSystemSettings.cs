@@ -5,6 +5,8 @@ public class BarrelControlSystemSettings
     public bool SimulateGpio { get; set; } = true;
     public int GpioIoPinCount { get; set; } = 26;
     public int RelayPinCount { get; set; } = 16;
+    
+    public DateTime LastUpdated { get; set; } = DateTime.Now;
 
     public List<RelayConfig> RelayBoardConfig { get; set; } = [];
 
@@ -15,7 +17,8 @@ public class BarrelControlSystemSettings
                $"------------------------------\n" +
                $"Simulate GPIO: {SimulateGpio}\n" +
                $"GPIO I/O Pin Count: {GpioIoPinCount}\n" +
-               $"Relay Pin Count: {RelayPinCount}\n\n" +
+               $"Relay Pin Count: {RelayPinCount}\n" +
+               $"Last Updated: {LastUpdated}\n\n" +
                $"Relay Board Configuration:\n" +
                $"{relayConfigs}";
     }

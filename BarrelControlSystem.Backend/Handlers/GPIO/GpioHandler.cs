@@ -1,29 +1,33 @@
 using System.Device.Gpio;
+using System.Device.Gpio.Drivers;
 using BarrelControlSystem.Models.Interfaces;
 
 namespace BarrelControlSystem.Backend.Handlers.GPIO;
 
-public class GpioHandler(GpioController controller) : IGpioHandler
+public class GpioHandler() : IGpioHandler
 {
+    private readonly GpioController _controller = new(new SysFsDriver());
+    
+    
     private readonly List<int> _openPins = new();
 
     public void SetHigh(int pinNumber)
     {
         OpenPinIfNotOpen(pinNumber);
-        controller.Write(pinNumber, PinValue.High);
+        _controller.Write(pinNumber, PinValue.High);
     }
 
     public void SetLow(int pinNumber)
     {
         OpenPinIfNotOpen(pinNumber);
-        controller.Write(pinNumber, PinValue.Low);
+        _controller.Write(pinNumber, PinValue.Low);
     }
 
     public void SetAllLow()
     {
         foreach (var pin in _openPins)
         {
-            controller.Write(pin, PinValue.Low);
+            _controller.Write(pin, PinValue.Low);
         }
     }
 
@@ -31,7 +35,7 @@ public class GpioHandler(GpioController controller) : IGpioHandler
     {
         foreach (var pin in _openPins)
         {
-            controller.Write(pin, PinValue.High);
+            _controller.Write(pin, PinValue.High);
         }
     }
 
@@ -45,19 +49,19 @@ public class GpioHandler(GpioController controller) : IGpioHandler
     public bool IsPinHigh(int pinNumber)
     {
         OpenPinIfNotOpen(pinNumber);
-        return controller.Read(pinNumber) == PinValue.High;
+        return _controller.Read(pinNumber) == PinValue.High;
     }
 
     private void OpenPinIfNotOpen(int pinNumber)
     {
-        if (!controller.IsPinOpen(pinNumber))
+        if (!_controller.IsPinOpen(pinNumber))
         {
-            controller.OpenPin(pinNumber, PinMode.Output);
+            _controller.OpenPin(pinNumber, PinMode.Output);
             _openPins.Add(pinNumber);
         }
-        else if (controller.GetPinMode(pinNumber) != PinMode.Output)
+        else if (_controller.GetPinMode(pinNumber) != PinMode.Output)
         {
-            controller.SetPinMode(pinNumber, PinMode.Output);
+            _controller.SetPinMode(pinNumber, PinMode.Output);
         }
 
         if (!_openPins.Contains(pinNumber))
@@ -69,6 +73,6 @@ public class GpioHandler(GpioController controller) : IGpioHandler
     public void Dispose()
     {
         SetAllLow();
-        controller.Dispose();
+        _controller.Dispose();
     }
 }

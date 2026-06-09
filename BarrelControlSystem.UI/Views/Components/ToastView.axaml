@@ -1,0 +1,13 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="BarrelControlSystem.UI.Views.Components.ToastView"
+             x:Name="Root"
+             HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
+    <Border Background="#333333" CornerRadius="4" Padding="10" BoxShadow="0 2 4 0 #40000000">
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <icons:MaterialIcon Kind="CheckCircle" Foreground="Green" Width="20" Height="20"/>
+            <TextBlock Text="{Binding #Root.Message}" Foreground="White" VerticalAlignment="Center"/>
+        </StackPanel>
+    </Border>
+</UserControl>

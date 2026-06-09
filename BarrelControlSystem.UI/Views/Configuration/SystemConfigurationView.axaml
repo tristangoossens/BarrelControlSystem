@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BarrelControlSystem.UI.ViewModels.Configuration"
+             xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="BarrelControlSystem.UI.Views.Configuration.SystemConfigurationView"
+             x:DataType="vm:SystemConfigurationViewModel">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <DockPanel LastChildFill="True" Margin="0, 10">
+            <!-- Buttons at the bottom right -->
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,20,0,0">
+                <Button Command="{Binding ResetToDefaultsCommand}" Background="{DynamicResource ResetButtonBrush}" Foreground="White" Padding="10,5">
+                    <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                        <icons:MaterialIcon Kind="Restore" Width="16" Height="16"/>
+                        <TextBlock Text="Reset all settings" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding SaveCommand}" Background="{DynamicResource SaveButtonBrush}" Foreground="White" Padding="10,5">
+                    <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                        <icons:MaterialIcon Kind="Check" Width="16" Height="16"/>
+                        <TextBlock Text="Save" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            
+            <StackPanel DockPanel.Dock="Top" Margin="0,0,0,15">
+                <TextBlock Text="System Settings" FontSize="20" FontWeight="Bold" Foreground="White"/>
+                <TextBlock Text="Configure global system settings and hardware connections." FontSize="14" Foreground="#a0a0a0"/>
+            </StackPanel>
+
+            <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Background="{DynamicResource MainBackgroundBrush}" CornerRadius="4" Padding="10">
+                <StackPanel Spacing="30">
+                    <!-- Setting 1: Simulate GPIO -->
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="Simulate GPIO" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                        <CheckBox IsChecked="{Binding SimulateGpio}" Content="Enable Simulation" Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <icons:MaterialIcon Kind="InformationOutline" Foreground="{DynamicResource IconBrush}" Width="16" Height="16"/>
+                            <TextBlock Text="Setting whether signals should be simulated" FontSize="12" Foreground="{DynamicResource TertiaryTextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Setting 2: GPIO Pin Count -->
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="GPIO Input/Output pin count" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                        <NumericUpDown Value="{Binding GpioPinCount}" Minimum="0" Maximum="100" Foreground="White" Margin="0,5"/>
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <icons:MaterialIcon Kind="InformationOutline" Foreground="{DynamicResource IconBrush}" Width="16" Height="16"/>
+                            <TextBlock Text="Sets the number of input output pins available on the SoC" FontSize="12" Foreground="{DynamicResource TertiaryTextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Setting 3: Relay Pin Count -->
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="Relay Pin count" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                        <NumericUpDown Value="{Binding RelayPinCount}" Minimum="0" Maximum="100" Foreground="White" Margin="0,5"/>
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <icons:MaterialIcon Kind="InformationOutline" Foreground="{DynamicResource IconBrush}" Width="16" Height="16"/>
+                            <TextBlock Text="Amount of input pins available on the relay board" FontSize="12" Foreground="{DynamicResource TertiaryTextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+    </ScrollViewer>
+</UserControl>

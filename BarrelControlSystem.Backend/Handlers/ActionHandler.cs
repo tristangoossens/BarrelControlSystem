@@ -14,13 +14,13 @@ public class ActionHandler : IDisposable
 
     public ActionHandler()
     {
-        _lastSimulateSetting = ConfigurationHandler.Settings.SimulateGpio;
+        _lastSimulateSetting = ConfigurationHandler.GetLatestSettings().SimulateGpio;
         _currentHandler = CreateHandler(_lastSimulateSetting);
     }
 
     private IGpioHandler GetHandler()
     {
-        bool currentSimulateSetting = ConfigurationHandler.Settings.SimulateGpio;
+        bool currentSimulateSetting = ConfigurationHandler.GetLatestSettings().SimulateGpio;
         
         if (currentSimulateSetting != _lastSimulateSetting || _currentHandler == null)
         {

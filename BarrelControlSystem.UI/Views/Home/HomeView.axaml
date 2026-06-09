@@ -1,0 +1,49 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BarrelControlSystem.UI.ViewModels.Home"
+             xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:views="clr-namespace:BarrelControlSystem.UI.Views.Components"
+             x:Class="BarrelControlSystem.UI.Views.Home.HomeView"
+             x:DataType="vm:HomeViewModel">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="30" Margin="0">
+            <!-- App Header -->
+            <views:AppHeaderView IsHomePage="True" Title="Barrel Control system (BCS)" Description="Control system for lights, horns and other electrical devices through a relay for the Barrel challenge"/>
+
+            <!-- Navigation Buttons -->
+            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <WrapPanel.Styles>
+                    <Style Selector="Button">
+                        <Setter Property="Margin" Value="10"/>
+                    </Style>
+                </WrapPanel.Styles>
+                <Button Classes="nav" x:CompileBindings="False" Command="{Binding $parent[Window].DataContext.GoToDashboardCommand}" 
+                        Width="160" Height="160" Padding="20">
+                    <StackPanel Spacing="10" VerticalAlignment="Center">
+                        <icons:MaterialIcon Kind="ViewDashboard" Width="48" Height="48" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Dashboard" FontSize="16" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                        <TextBlock Text="Device monitoring" FontSize="12" Foreground="#a0a0a0" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                
+                <Button Classes="nav" x:CompileBindings="False" Command="{Binding $parent[Window].DataContext.GoToProgramsCommand}" 
+                        Width="160" Height="160" Padding="20">
+                    <StackPanel Spacing="10" VerticalAlignment="Center">
+                        <icons:MaterialIcon Kind="FormatListBulleted" Width="48" Height="48" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Programs" FontSize="16" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                        <TextBlock Text="Manage sequences" FontSize="12" Foreground="#a0a0a0" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                
+                <Button Classes="nav" x:CompileBindings="False" Command="{Binding $parent[Window].DataContext.GoToConfigurationCommand}" 
+                        Width="160" Height="160" Padding="20">
+                    <StackPanel Spacing="10" VerticalAlignment="Center">
+                        <icons:MaterialIcon Kind="Settings" Width="48" Height="48" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Configuration" FontSize="16" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                        <TextBlock Text="System settings" FontSize="12" Foreground="#a0a0a0" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </WrapPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -4,10 +4,13 @@ namespace BarrelControlSystem.Backend.Models;
 
 public class RelayConfig
 {
+    public string Id => $"R{RelayPinNumber}_GPIO{GpioPinNumberBcm}";
+
     public int RelayPinNumber { get; set; }
     public int GpioPinNumberBcm { get; set; }
     public DeviceConfig ConnectedDevice { get; set; }
     
+    // Timestamps
     public DateTime LastUsed { get; set; }
     public DateTime ConfigurationLastUpdated { get; set; }
 

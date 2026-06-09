@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BarrelControlSystem.UI.ViewModels.Configuration"
+             xmlns:views="clr-namespace:BarrelControlSystem.UI.Views.Components"
+             xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="BarrelControlSystem.UI.Views.Configuration.ConfigurationView"
+             x:DataType="vm:ConfigurationViewModel">
+    <DockPanel LastChildFill="True">
+        <!-- App Header -->
+        <views:AppHeaderView DockPanel.Dock="Top" Margin="0,0,0,10" IsHomePage="False" IconKind="Settings" Title="Configuration" Description="Configure general settings and configure each relay pin connection to use connected devices">
+            <views:AppHeaderView.HeaderContent>
+                <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right" Margin="0, 5, 0, 0">
+                    <Button Command="{Binding GoToSystemConfigurationCommand}" Background="{DynamicResource NavButtonBrush}" Foreground="White" Padding="10,5">
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                            <icons:MaterialIcon Kind="Cog" Width="16" Height="16"/>
+                            <TextBlock Text="System Settings" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding GoToRelayConfigurationCommand}" Background="{DynamicResource NavButtonBrush}" Foreground="White" Padding="10,5">
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                            <icons:MaterialIcon Kind="ToggleSwitch" Width="16" Height="16"/>
+                            <TextBlock Text="Relay Configurations" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </views:AppHeaderView.HeaderContent>
+        </views:AppHeaderView>
+
+        <!-- Sub-page Content -->
+        <ContentControl Content="{Binding CurrentSubPage}"/>
+    </DockPanel>
+</UserControl>

@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.IO;
 using System.Runtime.CompilerServices;
 using BarrelControlSystem.Backend.Models.Enums;
 
@@ -6,25 +7,21 @@ namespace BarrelControlSystem.Backend.Handlers;
 
 public static class LoggingHandler
 {
-    private static readonly string LogDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
+    private static string LogDirectory => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
     private static readonly BlockingCollection<string> LogQueue = new();
 
     static LoggingHandler()
     {
-        try
-        {
-            if (!Directory.Exists(LogDirectory))
-            {
-                Directory.CreateDirectory(LogDirectory);
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"[ERROR] Failed to create log directory: {ex.Message}");
-        }
-
         // Start background worker for logging
         Task.Run(ProcessLogs);
+    }
+
+    private static void EnsureDirectoryExists()
+    {
+        if (!Directory.Exists(LogDirectory))
+        {
+            Directory.CreateDirectory(LogDirectory);
+        }
     }
 
     private static void ProcessLogs()
@@ -33,6 +30,7 @@ public static class LoggingHandler
         {
             try
             {
+                EnsureDirectoryExists();
                 string fileName = $"{DateTime.Now:yyyy-MM-dd}.log";
                 string filePath = Path.Combine(LogDirectory, fileName);
                 File.AppendAllText(filePath, logEntry + Environment.NewLine);

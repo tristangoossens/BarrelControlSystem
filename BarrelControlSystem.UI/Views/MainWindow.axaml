@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        xmlns:views="clr-namespace:BarrelControlSystem.UI.Views.Components"
         mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="600"
         x:Class="BarrelControlSystem.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -36,37 +37,35 @@
         </Style>
     </Window.Styles>
 
-    <Grid ColumnDefinitions="250, *">
+    <Grid ColumnDefinitions="80, *">
         <!-- Navigation Bar (Sidebar) -->
         <Border Grid.Column="0" Background="#2b2b2b" BorderBrush="#3c3c3c" BorderThickness="0,0,1,0">
-            <StackPanel Spacing="5" Margin="10">
-                <TextBlock Text="BCS" Foreground="White" FontSize="24" FontWeight="Bold" Margin="10,20,10,30" HorizontalAlignment="Center"/>
-                
-                <Button Classes="nav" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="15,10">
-                    <StackPanel Orientation="Horizontal" Spacing="15">
-                        <icons:MaterialIcon Kind="Home" Width="24" Height="24"/>
-                        <TextBlock Text="Homepage" VerticalAlignment="Center"/>
+            <StackPanel Spacing="10" Margin="5">
+                <Button Classes="nav" Command="{Binding GoToHomeCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5,5">
+                    <StackPanel Orientation="Vertical" Spacing="2">
+                        <icons:MaterialIcon Kind="Home" Width="20" Height="20" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Home" FontSize="10" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
 
-                <Button Classes="nav" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="15,10">
-                    <StackPanel Orientation="Horizontal" Spacing="15">
-                        <icons:MaterialIcon Kind="ViewDashboard" Width="24" Height="24"/>
-                        <TextBlock Text="Dashboard" VerticalAlignment="Center"/>
+                <Button Classes="nav" Command="{Binding GoToDashboardCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5,5">
+                    <StackPanel Orientation="Vertical" Spacing="2">
+                        <icons:MaterialIcon Kind="ViewDashboard" Width="20" Height="20" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Dashboard" FontSize="10" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
 
-                <Button Classes="nav" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="15,10">
-                    <StackPanel Orientation="Horizontal" Spacing="15">
-                        <icons:MaterialIcon Kind="FormatListBulleted" Width="24" Height="24"/>
-                        <TextBlock Text="Programs" VerticalAlignment="Center"/>
+                <Button Classes="nav" Command="{Binding GoToProgramsCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5,5">
+                    <StackPanel Orientation="Vertical" Spacing="2">
+                        <icons:MaterialIcon Kind="FormatListBulleted" Width="20" Height="20" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Programs" FontSize="10" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
 
-                <Button Classes="nav" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="15,10">
-                    <StackPanel Orientation="Horizontal" Spacing="15">
-                        <icons:MaterialIcon Kind="Settings" Width="24" Height="24"/>
-                        <TextBlock Text="Configuration" VerticalAlignment="Center"/>
+                <Button Classes="nav" Command="{Binding GoToConfigurationCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5,5">
+                    <StackPanel Orientation="Vertical" Spacing="2">
+                        <icons:MaterialIcon Kind="Settings" Width="20" Height="20" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Config" FontSize="10" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -74,9 +73,8 @@
 
         <!-- Main Content Area -->
         <Panel Grid.Column="1" Background="#1e1e1e">
-            <ContentControl Margin="20">
-                <TextBlock x:CompileBindings="False" Text="{Binding Greeting}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </ContentControl>
+            <ContentControl Margin="15, 10" Content="{Binding CurrentPage}"/>
+            <views:ToastView IsVisible="{Binding IsToastVisible}" Message="{Binding ToastMessage}" />
         </Panel>
     </Grid>
 </Window>

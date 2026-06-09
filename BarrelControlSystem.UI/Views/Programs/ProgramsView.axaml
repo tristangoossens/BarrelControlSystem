@@ -1,0 +1,14 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BarrelControlSystem.UI.ViewModels.Programs"
+             xmlns:views="clr-namespace:BarrelControlSystem.UI.Views.Components"
+             xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="BarrelControlSystem.UI.Views.Programs.ProgramsView"
+             x:DataType="vm:ProgramsViewModel">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="30" Margin="0">
+            <views:AppHeaderView IsHomePage="False" IconKind="FormatListBulleted" Title="Programs" Description="Manage sequences" />
+            <TextBlock Text="Programs Page" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

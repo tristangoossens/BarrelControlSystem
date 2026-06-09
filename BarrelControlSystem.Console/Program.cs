@@ -1,4 +1,4 @@
 ﻿using BarrelControlSystem.Backend.Handlers;
 
-var config = ConfigurationHandler.Settings;
+var config = ConfigurationHandler.GetLatestSettings();
 Console.WriteLine(config);
